@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:multiplication>
+         <a>6</a>
+         <b>7</b>
+      </ser:multiplication>
+   </soapenv:Body>
+</soapenv:Envelope>

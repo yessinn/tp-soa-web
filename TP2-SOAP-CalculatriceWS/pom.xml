@@ -51,13 +51,23 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
             </plugin>
-            <!-- Lancer le serveur avec : mvn compile exec:java -->
+            <!--
+                Lancer le serveur avec : mvn compile exec:exec
+                On utilise exec:exec (JVM séparée, classpath standard) et non exec:java :
+                avec exec:java, les threads du serveur HTTP ne voient pas l'implémentation
+                JAXB et la génération des SOAP Fault (division par zéro) échoue.
+            -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.2.0</version>
                 <configuration>
-                    <mainClass>serveur.ServeurJWS</mainClass>
+                    <executable>java</executable>
+                    <arguments>
+                        <argument>-classpath</argument>
+                        <classpath/>
+                        <argument>serveur.ServeurJWS</argument>
+                    </arguments>
                 </configuration>
             </plugin>
         </plugins>
