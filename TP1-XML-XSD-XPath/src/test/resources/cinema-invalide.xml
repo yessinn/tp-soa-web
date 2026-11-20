@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document volontairement INVALIDE, utilisé pour tester la validation :
+      - genre "Horreur" absent de l'énumération GenreType
+      - note 11.5 > maxInclusive (10)
+      - identifiant de film "F01" ne respectant pas le motif F[0-9]{3}
+      - séance référençant un film inexistant (F999) : violation du keyref
+      - utilisateur sans l'attribut obligatoire "actif"
+-->
+<cinema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="cinema.xsd"
+        nom="Cinéma Test" ville="Sfax">
+    <films>
+        <film id="F001" genre="Horreur">
+            <titre>Film invalide</titre>
+            <realisateur>Inconnu</realisateur>
+            <annee>2020</annee>
+            <duree>100</duree>
+            <note>11.5</note>
+            <acteurs>
+                <acteur>Acteur</acteur>
+            </acteurs>
+        </film>
+        <film id="F01" genre="Drame">
+            <titre>Identifiant mal formé</titre>
+            <realisateur>Inconnu</realisateur>
+            <annee>2021</annee>
+            <duree>90</duree>
+            <note>7.0</note>
+            <acteurs>
+                <acteur>Acteur</acteur>
+            </acteurs>
+        </film>
+    </films>
+    <salles>
+        <salle id="S1" nom="Salle 1" capacite="100" type="Standard"/>
+    </salles>
+    <seances>
+        <seance id="SE01" film="F999" salle="S1">
+            <date>2026-11-21</date>
+            <heure>18:00:00</heure>
+            <prix>9.000</prix>
+        </seance>
+    </seances>
+    <utilisateurs>
+        <utilisateur id="U01">
+            <nom>Test</nom>
+            <prenom>Test</prenom>
+            <email>test@example.tn</email>
+            <abonnement>Aucun</abonnement>
+        </utilisateur>
+    </utilisateurs>
+    <reservations/>
+</cinema>

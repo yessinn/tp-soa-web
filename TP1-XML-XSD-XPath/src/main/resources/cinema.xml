@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cinema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="cinema.xsd"
+        nom="Cinéma Le Colisée" ville="Sfax">
+
+    <films>
+        <film id="F001" genre="Science-Fiction" langue="VO">
+            <titre>Inception</titre>
+            <realisateur>Christopher Nolan</realisateur>
+            <annee>2010</annee>
+            <duree>148</duree>
+            <note>8.8</note>
+            <acteurs>
+                <acteur>Leonardo DiCaprio</acteur>
+                <acteur>Marion Cotillard</acteur>
+                <acteur>Elliot Page</acteur>
+            </acteurs>
+            <synopsis>Un voleur s'infiltre dans les rêves pour y dérober des secrets.</synopsis>
+        </film>
+        <film id="F002" genre="Science-Fiction" langue="VOSTFR">
+            <titre>Interstellar</titre>
+            <realisateur>Christopher Nolan</realisateur>
+            <annee>2014</annee>
+            <duree>169</duree>
+            <note>8.7</note>
+            <acteurs>
+                <acteur>Matthew McConaughey</acteur>
+                <acteur>Anne Hathaway</acteur>
+            </acteurs>
+        </film>
+        <film id="F003" genre="Drame" langue="VF">
+            <titre>Intouchables</titre>
+            <realisateur>Olivier Nakache</realisateur>
+            <annee>2011</annee>
+            <duree>112</duree>
+            <note>8.5</note>
+            <acteurs>
+                <acteur>François Cluzet</acteur>
+                <acteur>Omar Sy</acteur>
+            </acteurs>
+        </film>
+        <film id="F004" genre="Animation">
+            <titre>Le Roi Lion</titre>
+            <realisateur>Roger Allers</realisateur>
+            <annee>1994</annee>
+            <duree>88</duree>
+            <note>8.5</note>
+            <acteurs>
+                <acteur>Jean Reno</acteur>
+            </acteurs>
+        </film>
+        <film id="F005" genre="Thriller" langue="VOSTFR">
+            <titre>Parasite</titre>
+            <realisateur>Bong Joon-ho</realisateur>
+            <annee>2019</annee>
+            <duree>132</duree>
+            <note>8.5</note>
+            <acteurs>
+                <acteur>Song Kang-ho</acteur>
+                <acteur>Choi Woo-shik</acteur>
+            </acteurs>
+        </film>
+        <film id="F006" genre="Action" langue="VF">
+            <titre>The Revenant</titre>
+            <realisateur>Alejandro González Iñárritu</realisateur>
+            <annee>2015</annee>
+            <duree>156</duree>
+            <note>8.0</note>
+            <acteurs>
+                <acteur>Leonardo DiCaprio</acteur>
+                <acteur>Tom Hardy</acteur>
+            </acteurs>
+        </film>
+    </films>
+
+    <salles>
+        <salle id="S1" nom="Salle Carthage" capacite="200" type="IMAX"/>
+        <salle id="S2" nom="Salle Kerkennah" capacite="120" type="3D"/>
+        <salle id="S3" nom="Salle Medina" capacite="80" type="Standard"/>
+    </salles>
+
+    <seances>
+        <seance id="SE01" film="F001" salle="S1" promotion="true">
+            <date>2026-11-21</date>
+            <heure>18:00:00</heure>
+            <prix>9.000</prix>
+        </seance>
+        <seance id="SE02" film="F002" salle="S1">
+            <date>2026-11-21</date>
+            <heure>21:00:00</heure>
+            <prix>14.000</prix>
+        </seance>
+        <seance id="SE03" film="F003" salle="S3" promotion="true">
+            <date>2026-11-22</date>
+            <heure>15:30:00</heure>
+            <prix>6.500</prix>
+        </seance>
+        <seance id="SE04" film="F004" salle="S2" promotion="false">
+            <date>2026-11-22</date>
+            <heure>14:00:00</heure>
+            <prix>10.000</prix>
+        </seance>
+        <seance id="SE05" film="F005" salle="S3">
+            <date>2026-11-23</date>
+            <heure>20:30:00</heure>
+            <prix>8.000</prix>
+        </seance>
+    </seances>
+
+    <utilisateurs>
+        <utilisateur id="U01" actif="true">
+            <nom>Ben Salah</nom>
+            <prenom>Amine</prenom>
+            <email>amine.bensalah@example.tn</email>
+            <abonnement>Premium</abonnement>
+        </utilisateur>
+        <utilisateur id="U02" actif="false">
+            <nom>Trabelsi</nom>
+            <prenom>Sarra</prenom>
+            <email>sarra.trabelsi@example.tn</email>
+            <abonnement>Aucun</abonnement>
+        </utilisateur>
+        <utilisateur id="U03" actif="true">
+            <nom>Gharbi</nom>
+            <prenom>Mehdi</prenom>
+            <email>mehdi.gharbi@example.tn</email>
+            <abonnement>Standard</abonnement>
+        </utilisateur>
+        <utilisateur id="U04" actif="true">
+            <nom>Karray</nom>
+            <prenom>Nour</prenom>
+            <email>nour.karray@example.tn</email>
+            <abonnement>Premium</abonnement>
+        </utilisateur>
+    </utilisateurs>
+
+    <reservations>
+        <reservation id="R001" utilisateur="U01" seance="SE01" places="2"/>
+        <reservation id="R002" utilisateur="U03" seance="SE02" places="1"/>
+        <reservation id="R003" utilisateur="U04" seance="SE01" places="4"/>
+        <reservation id="R004" utilisateur="U01" seance="SE05" places="1"/>
+    </reservations>
+
+</cinema>
