@@ -1,0 +1,186 @@
+{
+  "info": {
+    "name": "TP3 - Calculatrice REST (JAX-RS / Jersey)",
+    "description": "Tests de l'API REST Calculatrice déployée dans Tomcat 10.1.\nBase : http://localhost:8080/CalculatriceREST/api/calcul",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080/CalculatriceREST/api/calcul" }
+  ],
+  "item": [
+    {
+      "name": "1. Addition (GET /somme)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/somme?a=5&b=3",
+          "host": ["{{baseUrl}}"],
+          "path": ["somme"],
+          "query": [{ "key": "a", "value": "5" }, { "key": "b", "value": "3" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 200', () => pm.response.to.have.status(200));",
+          "pm.test('JSON {a, b, op, res}', () => {",
+          "  const o = pm.response.json();",
+          "  pm.expect(o).to.eql({ a: 5, b: 3, op: '+', res: 8 });",
+          "});"
+        ] }
+      }]
+    },
+    {
+      "name": "2. Soustraction (GET /soustraction)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/soustraction?a=10&b=4",
+          "host": ["{{baseUrl}}"],
+          "path": ["soustraction"],
+          "query": [{ "key": "a", "value": "10" }, { "key": "b", "value": "4" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 200', () => pm.response.to.have.status(200));",
+          "pm.test('res = 6, op = -', () => {",
+          "  const o = pm.response.json();",
+          "  pm.expect(o.op).to.eql('-');",
+          "  pm.expect(o.res).to.eql(6);",
+          "});"
+        ] }
+      }]
+    },
+    {
+      "name": "3. Multiplication (GET /multiplication)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/multiplication?a=6&b=7",
+          "host": ["{{baseUrl}}"],
+          "path": ["multiplication"],
+          "query": [{ "key": "a", "value": "6" }, { "key": "b", "value": "7" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 200', () => pm.response.to.have.status(200));",
+          "pm.test('res = 42, op = *', () => {",
+          "  const o = pm.response.json();",
+          "  pm.expect(o.op).to.eql('*');",
+          "  pm.expect(o.res).to.eql(42);",
+          "});"
+        ] }
+      }]
+    },
+    {
+      "name": "4. Division (GET /division)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/division?a=15&b=4",
+          "host": ["{{baseUrl}}"],
+          "path": ["division"],
+          "query": [{ "key": "a", "value": "15" }, { "key": "b", "value": "4" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 200', () => pm.response.to.have.status(200));",
+          "pm.test('res = 3.75, op = /', () => {",
+          "  const o = pm.response.json();",
+          "  pm.expect(o.op).to.eql('/');",
+          "  pm.expect(o.res).to.eql(3.75);",
+          "});"
+        ] }
+      }]
+    },
+    {
+      "name": "5. Division par zéro (400)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/division?a=10&b=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["division"],
+          "query": [{ "key": "a", "value": "10" }, { "key": "b", "value": "0" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 400 Bad Request', () => pm.response.to.have.status(400));",
+          "pm.test('Message d\\'erreur', () => pm.expect(pm.response.json().erreur).to.include('Division par z'));"
+        ] }
+      }]
+    },
+    {
+      "name": "6. Paramètre manquant (400)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{baseUrl}}/somme?a=5",
+          "host": ["{{baseUrl}}"],
+          "path": ["somme"],
+          "query": [{ "key": "a", "value": "5" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 400 Bad Request', () => pm.response.to.have.status(400));"
+        ] }
+      }]
+    },
+    {
+      "name": "7. Addition en XML (Accept: application/xml)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Accept", "value": "application/xml" }],
+        "url": {
+          "raw": "{{baseUrl}}/somme?a=5&b=3",
+          "host": ["{{baseUrl}}"],
+          "path": ["somme"],
+          "query": [{ "key": "a", "value": "5" }, { "key": "b", "value": "3" }]
+        }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 200', () => pm.response.to.have.status(200));",
+          "pm.test('Content-Type XML', () => pm.response.to.have.header('Content-Type', 'application/xml'));",
+          "pm.test('<res>8.0</res>', () => pm.expect(pm.response.text()).to.include('<res>8.0</res>'));"
+        ] }
+      }]
+    },
+    {
+      "name": "8. Calcul à partir d'un JSON (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"a\": 5,\n  \"b\": 3,\n  \"op\": \"*\"\n}" },
+        "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] }
+      },
+      "event": [{
+        "listen": "test",
+        "script": { "type": "text/javascript", "exec": [
+          "pm.test('Statut 200', () => pm.response.to.have.status(200));",
+          "pm.test('res = 15', () => pm.expect(pm.response.json().res).to.eql(15));"
+        ] }
+      }]
+    }
+  ]
+}

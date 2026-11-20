@@ -1,0 +1,76 @@
+<claude-code-hint v="1" type="plugin" value="postman@claude-plugins-official" />
+No authorization data found. Please use the `postman login` command.
+Refer:https://learning.postman.com/docs/postman-cli/postman-cli-options/#postman-login
+
+Running your collection...
+postman
+
+TP3 - Calculatrice REST (JAX-RS / Jersey)
+
+Root 1. Addition (GET /somme)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/somme?a=5&b=3 [200 OK, 192 B, 70 ms]
+  Pass  Statut 200
+  Pass  JSON {a, b, op, res}
+
+Root 2. Soustraction (GET /soustraction)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/soustraction?a=10&b=4 [200 OK, 193 B, 19 ms]
+  Pass  Statut 200
+  Pass  res = 6, op = -
+
+Root 3. Multiplication (GET /multiplication)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/multiplication?a=6&b=7 [200 OK, 193 B, 31 ms]
+  Pass  Statut 200
+  Pass  res = 42, op = *
+
+Root 4. Division (GET /division)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/division?a=15&b=4 [200 OK, 194 B, 16 ms]
+  Pass  Statut 200
+  Pass  res = 3.75, op = /
+
+Root 5. Division par zéro (400)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/division?a=10&b=0 [400 Bad Request, 222 B, 15 ms]
+  Pass  Statut 400 Bad Request
+  Pass  Message d'erreur
+
+Root 6. Paramètre manquant (400)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/somme?a=5 [400 Bad Request, 220 B, 50 ms]
+  Pass  Statut 400 Bad Request
+
+Root 7. Addition en XML (Accept: application/xml)
+
+  GET http://localhost:8080/CalculatriceREST/api/calcul/somme?a=5&b=3 [200 OK, 278 B, 27 ms]
+  Pass  Statut 200
+  Pass  Content-Type XML
+  Pass  <res>8.0</res>
+
+Root 8. Calcul à partir d'un JSON (POST)
+
+  POST http://localhost:8080/CalculatriceREST/api/calcul [200 OK, 193 B, 12 ms]
+  Pass  Statut 200
+  Pass  res = 15
+
+----------------------------------------------------------------------
+|                         |            executed |             failed |
+--------------------------+---------------------+---------------------
+|              iterations |                   1 |                  0 |
+--------------------------+---------------------+---------------------
+|                requests |                   8 |                  0 |
+--------------------------+---------------------+---------------------
+|            test-scripts |                   8 |                  0 |
+--------------------------+---------------------+---------------------
+|      prerequest-scripts |                   0 |                  0 |
+--------------------------+---------------------+---------------------
+|              assertions |                  16 |                  0 |
+----------------------------------------------------------------------
+| total run duration: 868 ms                                         |
+----------------------------------------------------------------------
+| total data received: 477 B (approx)                                |
+----------------------------------------------------------------------
+| average response time: 30 ms [min: 12 ms, max: 70 ms, s.d.: 18 ms] |
+----------------------------------------------------------------------
